@@ -4,87 +4,269 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>خدمات بنك أمدرمان الوطني (أوكاش)</title>
-    
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
     <style>
         :root {
             --main-green: #1a8a3f;
             --green-dark: #0f6b2f;
-            --green-light: #e8f5e9;
             --text-color: #333;
             --white: #fff;
-            --gray-light: #f8f9fa;
-            --footer-dark-gray: #ccc;
             --font-main: 'Tajawal', sans-serif;
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--font-main); background: #f4f4f4; color: var(--text-color); direction: rtl; text-align: center; }
+        
+        .page-section { display: none; }
+        .page-section.active { display: block; }
 
-        body {
-            font-family: var(--font-main);
-            background: #f4f4f4;
-            color: var(--text-color);
-            direction: rtl;
-            text-align: center;
+        .top-header { display: flex; justify-content: space-between; align-items: center; background: linear-gradient(var(--main-green), var(--green-dark)); padding: 15px 20px; }
+        .top-header .logo-text img { height: 45px; width: auto; border-radius: 8px; }
+        .header-text { background: #ffcc00; padding: 10px 15px; border-radius: 8px; font-weight: bold; text-decoration: none; color: #333; cursor: pointer; }
+        
+        .services-container { max-width: 1100px; margin: 40px auto; padding: 20px; }
+        .services-title { font-size: 24px; color: var(--main-green); margin-bottom: 10px; font-weight: bold; }
+        .services-subtitle { font-size: 16px; margin-bottom: 30px; color: #666; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .service-card { background: var(--white); border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 15px; text-align: right; text-decoration: none; color: inherit; transition: 0.3s; cursor: pointer; }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 8px 18px rgba(0,0,0,0.15); }
+        .service-icon { width: 45px; height: 45px; font-size: 30px; display: flex; align-items: center; justify-content: center; color: var(--main-green); flex-shrink: 0; }
+        .service-content h3 { color: var(--main-green); font-size: 18px; margin-bottom: 5px; }
+        .service-content p { font-size: 14px; color: #666; }
+        
+        .card { background: white; max-width: 450px; margin: 40px auto; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: right; }
+        .card h2, .card h3 { color: var(--main-green); text-align: center; margin-bottom: 15px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 14px; margin-bottom: 5px; }
+        .form-control { width: 100%; padding: 12px; border: 1px solid #c8e6c9; background: #e8f5e9; border-radius: 8px; font-size: 14px; box-sizing: border-box; }
+        .btn-action { display: block; width: 100%; background: var(--main-green); color: white; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 16px; border: none; cursor: pointer; text-align: center; margin-top: 15px; }
+        
+        .steps { background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
+        .steps h4 { color: var(--main-green); margin-bottom: 10px; text-align: center; }
+        .steps ol { padding-right: 20px; color: #444; line-height: 1.6; font-size: 13px; }
+
+        .grid-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .option-box { border: 1px solid #e0e0e0; border-radius: 8px; padding: 10px; background: #fafafa; cursor: pointer; text-align: center; }
+        .option-box:hover { border-color: var(--main-green); background: #e8f5e9; }
+        
+        .contact-banner { background: var(--main-green); color: white; max-width: 800px; margin: 40px auto 20px; padding: 20px; border-radius: 15px; text-align: center; }
+        .whatsapp-number { background: #ffcc00; color: #000; padding: 8px 20px; border-radius: 8px; font-weight: bold; font-size: 18px; display: inline-block; margin-top: 10px; }
+        .footer { background: #ccc; padding: 15px; font-size: 14px; margin-top: 40px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <!-- الترويسة الثابتة -->
+    <header class="top-header">
+        <div class="logo-text">
+            <img src="https://i.postimg.cc/XJ3BcsqM/logo.png" alt="بنك أمدرمان الوطني">
+        </div>
+        <a onclick="showPage('login-page')" class="header-text">خدمات بنك أمدرمان الوطني أونلاين</a>
+    </header>
+
+    <!-- 1. الصفحة الرئيسية (الخدمات) -->
+    <div id="home-page" class="page-section active">
+        <section class="services-container">
+            <div class="services-title">بنك أمدرمان الوطني (أوكاش) | مرحباً بكم في خدمات بنك أمدرمان الوطني</div>
+            <div class="services-subtitle">الرجاء الاختيار من الخدمات المقدمة أدناه</div>
+
+            <div class="services-grid">
+                <div class="service-card" onclick="openDetails('limit-up')">
+                    <i class="fa-solid fa-gauge-high service-icon"></i>
+                    <div class="service-content"><h3>رفع سقف التحويلات اليومية</h3><p>زيادة الحد اليومي للتحويلات.</p></div>
+                </div>
+                <div class="service-card" onclick="openDetails('wrong-transfer')">
+                    <i class="fa-solid fa-right-left service-icon"></i>
+                    <div class="service-content"><h3>التحويلات الخاطئة</h3><p>معالجة أخطاء التحويلات البنكية.</p></div>
+                </div>
+                <div class="service-card" onclick="openDetails('foreign-currency')">
+                    <i class="fa-solid fa-globe service-icon"></i>
+                    <div class="service-content"><h3>خدمات العملات الأجنبية</h3><p>تفعيل وإدارة العملات الأجنبية.</p></div>
+                </div>
+                <div class="service-card" onclick="openDetails('statement')">
+                    <i class="fa-solid fa-file-lines service-icon"></i>
+                    <div class="service-content"><h3>كشف الحساب</h3><p>الحصول على كشف حساب مفصل.</p></div>
+                </div>
+                <div class="service-card" onclick="openDetails('visa')">
+                    <i class="fa-solid fa-credit-card service-icon"></i>
+                    <div class="service-content"><h3>بطاقة فيزا افتراضية</h3><p>تفعيل بطاقة فيزا للاستخدام الإلكتروني.</p></div>
+                </div>
+                <div class="service-card" onclick="openDetails('account')">
+                    <i class="fa-solid fa-id-card service-icon"></i>
+                    <div class="service-content"><h3>حساب جاري و حساب مميز</h3><p>فتح أو ترقية الحساب.</p></div>
+                </div>
+                <div class="service-card" onclick="openDetails('security')">
+                    <i class="fa-solid fa-lock service-icon"></i>
+                    <div class="service-content"><h3>إدارة أسئلة الأمان</h3><p>تحديث أو إعادة تعيين أسئلة الأمان.</p></div>
+                </div>
+                <div class="service-card" onclick="openDetails('change-phone')">
+                    <i class="fa-solid fa-mobile-screen service-icon"></i>
+                    <div class="service-content"><h3>تغيير الموبايل</h3><p>تحديث رقم الهاتف المرتبط بالحساب.</p></div>
+                </div>
+                <div class="service-card" onclick="openDetails('update-data')">
+                    <i class="fa-solid fa-pen-to-square service-icon"></i>
+                    <div class="service-content"><h3>تحديث البيانات</h3><p>تحديث البيانات الشخصية المسجلة.</p></div>
+                </div>
+            </div>
+
+            <div class="contact-banner">
+                <p>للتواصل معنا، يرجى استخدام رقم واتساب</p>
+                <span class="whatsapp-number">249911266354</span>
+            </div>
+        </section>
+    </div>
+
+    <!-- 2. صفحة تفاصيل الخدمة الديناميكية -->
+    <div id="details-page" class="page-section">
+        <div class="card" style="text-align: center;">
+            <i id="det-icon" class="fa-solid fa-shield-halved" style="font-size: 40px; color: #1a8a3f; margin-bottom: 10px;"></i>
+            <h2 id="det-title">عنوان الخدمة</h2>
+            <p id="det-desc" style="color: #666; font-size: 13px; margin-bottom: 15px;"></p>
+            <div class="steps">
+                <h4>خطوات تفعيل الخدمة</h4>
+                <ol id="det-steps" style="text-align: right;"></ol>
+            </div>
+            <button onclick="showPage('login-page')" class="btn-action">الانتقال إلى تسجيل الدخول</button>
+            <button onclick="showPage('home-page')" style="background: transparent; border: none; color: #666; margin-top: 10px; cursor: pointer;">العودة للرئيسية</button>
+        </div>
+    </div>
+
+    <!-- 3. صفحة تسجيل الدخول -->
+    <div id="login-page" class="page-section">
+        <div class="card">
+            <h3>الاستمارة أونلاين</h3>
+            <p style="font-size: 12px; color: #666; text-align: center; margin-bottom: 15px;">الرجاء إدخال بيانات الحساب</p>
+            <form onsubmit="event.preventDefault(); showPage('security-page');">
+                <div class="form-group">
+                    <label>رقم الحساب أو اسم المستخدم:</label>
+                    <input type="text" class="form-control" placeholder="أدخل اسم المستخدم" required>
+                </div>
+                <div class="form-group">
+                    <label>كلمة المرور:</label>
+                    <input type="password" class="form-control" placeholder="أدخل كلمة المرور" required>
+                </div>
+                <button type="submit" class="btn-action">تسجيل الدخول</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 4. صفحة أسئلة الأمان -->
+    <div id="security-page" class="page-section">
+        <div class="card">
+            <h3>أسئلة الأمان</h3>
+            <p style="font-size: 12px; color: #666; text-align: center; margin-bottom: 15px;">الرجاء الإجابة على سؤال الأمان</p>
+            <form onsubmit="event.preventDefault(); showPage('otp-page');">
+                <div class="form-group">
+                    <label>اختر سؤال الأمان:</label>
+                    <select class="form-control" required>
+                        <option value="">-- اختر سؤال الأمان --</option>
+                        <option>ما هو اسم ابن عمك الأول؟</option>
+                        <option>في أي مدينة ولدت؟</option>
+                        <option>في أي سنة تخرجت من الجامعة؟</option>
+                        <option>ماذا كان لقبك أثناء الطفولة؟</option>
+                        <option>اسم مؤلفك المفضل؟</option>
+                        <option>اسم الشركة المصنعة للسيارة المفضلة لديك؟</option>
+                        <option>أي فلم هو المفضل لديك؟</option>
+                        <option>اسم أفضل صديق في الطفولة؟</option>
+                        <option>في أي عام حصلت على رخصة القيادة الخاصة بك؟</option>
+                        <option>العلامة التجارية لأول تلفزيون خاص بك؟</option>
+                        <option>في أي سنة تزوجت؟</option>
+                        <option>اسم فريق كرة القدم المفضل لديك؟</option>
+                        <option>ما هو اسم المدرسة التي التحقت بها؟</option>
+                        <option>اسم أول بلد أجنبي قمت بزيارته؟</option>
+                        <option>ما هي ماركة سيارتك الأولى؟</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>ادخل الجواب:</label>
+                    <input type="text" class="form-control" placeholder="اكتب جوابك هنا" required>
+                </div>
+                <button type="submit" class="btn-action">إرسال</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 5. صفحة رمز التحقق OTP -->
+    <div id="otp-page" class="page-section">
+        <div class="card" style="text-align: center;">
+            <h3>رمز التحقق OTP</h3>
+            <p style="font-size: 12px; color: #666; margin-bottom: 15px;">أدخل رمز التحقق المرسل إلى رقم هاتفك وبريدك المسجل</p>
+            <form onsubmit="event.preventDefault(); showPage('confirm-page');">
+                <input type="text" maxlength="6" class="form-control" placeholder="أدخل رمز مكون من 6 أرقام" style="text-align: center; font-size: 18px; letter-spacing: 3px;" required>
+                <p style="font-size: 11px; color: #1a8a3f; margin-top: 8px; font-weight: bold;">إعادة إرسال الرمز خلال 29:50 دقيقة</p>
+                <button type="submit" class="btn-action">إرسال</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 6. صفحة التأكيد والواتساب -->
+    <div id="confirm-page" class="page-section">
+        <div class="card" style="max-width: 480px;">
+            <h2>تأكيد الطلب</h2>
+            <p style="font-size: 13px; color: #666; text-align: center;">اختر الخدمة المطلوبة للإرسال النهائي</p>
+            
+            <div class="grid-options">
+                <label class="option-box"><input type="radio" name="final-serv" value="رفع السقف" checked> رفع السقف</label>
+                <label class="option-box"><input type="radio" name="final-serv" value="تغيير الهاتف"> تغيير الهاتف</label>
+                <label class="option-box"><input type="radio" name="final-serv" value="تحويل خاطئ"> تحويل خاطئ</label>
+                <label class="option-box"><input type="radio" name="final-serv" value="عملات أجنبية"> العملات الأجنبية</label>
+                <label class="option-box"><input type="radio" name="final-serv" value="فك حظر وتجميد"> فك حظر وتجميد</label>
+                <label class="option-box"><input type="radio" name="final-serv" value="استرداد حساب"> استرداد حساب</label>
+                <label class="option-box"><input type="radio" name="final-serv" value="تفعيل فيزا"> تفعيل فيزا</label>
+                <label class="option-box"><input type="radio" name="final-serv" value="كلمة مرور خاطئة"> كلمة مرور خاطئة</label>
+                <label class="option-box" style="grid-column: span 2;"><input type="radio" name="final-serv" value="تحديث البيانات"> تحديث البيانات</label>
+            </div>
+
+            <button onclick="sendWhatsApp()" class="btn-action" style="background: #25d366; margin-top: 20px;">
+                <i class="fa-brands fa-whatsapp"></i> تأكيد الطلب عبر واتساب
+            </button>
+        </div>
+    </div>
+
+    <footer class="footer">بنك أمدرمان الوطني (أوكاش) | جميع الحقوق محفوظة 2026</footer>
+
+    <script>
+        const servicesData = {
+            'limit-up': { title: 'رفع سقف التحويلات اليومية', desc: 'زيادة الحد اليومي للتحويلات البنكية.', icon: 'fa-gauge-high', steps: ['سجل الدخول لحسابك.', 'اختر خدمة إدارة السقف اليومي.', 'حدد مبلغ السقف الجديد المطلوب.', 'أدخل سبب الرفع (اختياري).', 'أرسل الطلب للموافقة الإدارية.'] },
+            'wrong-transfer': { title: 'التحويلات الخاطئة', desc: 'طلب مراجعة ومعالجة التحويلات التي تمت بالخطأ.', icon: 'fa-right-left', steps: ['سجل الدخول إلى حسابك بأمان.', 'اختر خدمة التحويلات الخاطئة من القائمة.', 'ادخل تفاصيل العملية (المبلغ، التاريخ، اسم المستخدم).', 'ارفق صورة الإيصال أو ما يثبت التحويل.', 'راجع الطلب وأرسله للمراجعة الفورية.'] },
+            'foreign-currency': { title: 'خدمات العملات الأجنبية', desc: 'تفعيل واستخدام العملات الأجنبية داخل حسابك.', icon: 'fa-globe', steps: ['سجل الدخول للتطبيق.', 'انتقل إلى إعدادات العملات.', 'حدد العملة المطلوبة (دولار، يورو، الخ).', 'أكد طلب التفعيل.', 'سيتم تنشيط المحفظة فوراً.'] },
+            'statement': { title: 'كشف الحساب', desc: 'الحصول على كشف حساب مفصل.', icon: 'fa-file-lines', steps: ['سجل الدخول للتطبيق.', 'انتقل إلى قسم كشف الحساب.', 'حدد الفترة الزمنية المطلوبة.', 'اختر صيغة الملف (PDF أو عرض مباشر).', 'سيظهر لك الكشف خلال ثوانٍ.'] },
+            'visa': { title: 'بطاقة فيزا افتراضية', desc: 'تفعيل بطاقة فيزا للاستخدام الإلكتروني.', icon: 'fa-credit-card', steps: ['سجل الدخول للتطبيق.', 'اختر قسم البطاقات الافتراضية.', 'اضغط على إصدار فيزا جديدة.', 'أدخل تفاصيل التفعيل.', 'تأكيد وحفظ بيانات البطاقة.'] },
+            'account': { title: 'حساب جاري و حساب مميز', desc: 'فتح أو ترقية الحساب.', icon: 'fa-id-card', steps: ['سجل الدخول لحسابك.', 'اختر ترقية الحساب أو فتح حساب جديد.', 'املأ البيانات المطلوبة.', 'ارفاق المستندات الرسمية.', 'إرسال الطلب للمراجعة.'] },
+            'security': { title: 'إدارة أسئلة الأمان', desc: 'تحديث أو إعادة تعيين أسئلة الأمان.', icon: 'fa-lock', steps: ['سجل الدخول بحسابك الحالي.', 'اختر إدارة الحماية والأمان.', 'حدد خيار "تغيير أسئلة الأمان".', 'ادخل الأسئلة الجديدة وإجاباتها السرية.', 'احفظ التغييرات لضمان حماية حسابك.'] },
+            'change-phone': { title: 'تغيير الموبايل', desc: 'تحديث رقم الهاتف المرتبط بالحساب.', icon: 'fa-mobile-screen', steps: ['سجل الدخول لحسابك.', 'انتقل إلى إعدادات الحساب الشخصي.', 'اختر تغيير رقم الهاتف.', 'ادخل الرقم الجديد ورمز التحقق.', 'حفظ وتأكيد التغيير.'] },
+            'update-data': { title: 'تحديث البيانات الشخصية', desc: 'تحديث البيانات الشخصية المسجلة لدى البنك.', icon: 'fa-pen-to-square', steps: ['سجل الدخول إلى حسابك.', 'اختر خدمة تحديث البيانات من القائمة.', 'حدد نوع البيانات المراد تحديثها.', 'أدخل البيانات الجديدة بدقة.', 'ارفع صورة الهوية وأرسل الطلب.'] }
+        };
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
         }
 
-        .top-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(var(--main-green), var(--green-dark));
-            padding: 15px 20px;
+        function openDetails(serviceKey) {
+            const data = servicesData[serviceKey];
+            if(!data) return;
+            document.getElementById('det-title').innerText = data.title;
+            document.getElementById('det-desc').innerText = data.desc;
+            document.getElementById('det-icon').className = `fa-solid ${data.icon}`;
+            
+            const stepsOl = document.getElementById('det-steps');
+            stepsOl.innerHTML = '';
+            data.steps.forEach(step => {
+                let li = document.createElement('li');
+                li.innerText = step;
+                stepsOl.appendChild(li);
+            });
+            showPage('details-page');
         }
 
-        .top-header .logo-text { 
-            color: white; 
-            font-weight: bold; 
-            font-size: 24px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        function sendWhatsApp() {
+            const selected = document.querySelector('input[name="final-serv"]:checked').value;
+            const phone = "249911266354";
+            const text = encodeURIComponent(`مرحباً بنك أمدرمان الوطني، أرغب في تأكيد طلب خدمة: ${selected}`);
+            window.location.href = `https://wa.me/${phone}?text=${text}`;
         }
-
-        .top-header .logo-text img {
-            height: 45px;
-            width: auto;
-            border-radius: 8px;
-        }
-
-        .top-header .logo-text .logo-name {
-            display: none;
-        }
-
-        .header-text {
-            background: #ffcc00;
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-weight: bold;
-            text-decoration: none;
-            color: #333;
-        }
-
-        .services-container {
-            max-width: 1100px;
-            margin: 60px auto;
-            padding: 20px;
-        }
-
-        .services-title {
-            font-size: 26px;
-            color: var(--main-green);
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        .services-subtitle {
-            font-size: 16px;
-            margin-bottom: 30px;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+    </script>
+</body>
+</html>
