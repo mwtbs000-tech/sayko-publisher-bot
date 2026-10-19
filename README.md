@@ -1,1 +1,0 @@
-# sayko-publisher-bot
